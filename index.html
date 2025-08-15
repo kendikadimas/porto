@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brutalist Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+  <style>
+    /* Neobrutalist Styles */
+    .brutal-border {
+      border: 3px solid black;
+    }
+    
+    .brutal-border-thin {
+      border: 2px solid black;
+    }
+    
+    /* Text Stroke Effect for Neobrutalist Typography */
+    .text-stroke {
+      -webkit-text-stroke: 4px black;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    /* Enhanced Button Effects */
+    .switch-btn {
+        position: relative;
+        overflow: hidden;
+        transition: all 0.2s ease;
+        box-shadow: 3px 3px 0px black;
+        border: 3px solid black;
+        transform: translate(0, 0);
+    }
+
+    .switch-btn:hover {
+        box-shadow: 1px 1px 0px black;
+        transform: translate(2px, 2px);
+    }
+
+    .switch-btn:active {
+        box-shadow: 0px 0px 0px black;
+        transform: translate(3px, 3px);
+    }
+
+    /* Custom Classes */
+    .accent-bg {
+      background-color: #27AE60;
+    }
+    
+    .accent-text {
+      color: #27AE60;
+    }
+
+    /* Enhanced Hover Effects */
+    .card-hover:hover {
+        transform: translateY(-3px);
+        box-shadow: 5px 5px 0px black;
+    }
+    
+    /* Neobrutalist Animation */
+    @keyframes brutalist-float {
+      0%, 100% { transform: rotate(3deg) translateY(0px); }
+      50% { transform: rotate(-3deg) translateY(-10px); }
+    }
+    
+    .brutalist-float {
+      animation: brutalist-float 6s ease-in-out infinite;
+    }
+    
+    /* Typography Enhancements */
+    .tracking-tighter {
+      letter-spacing: -0.05em;
+    }
+    
+    .tracking-wide {
+      letter-spacing: 0.1em;
+    }
+
+    .tech-hover:hover {
+        background-color: rgba(39, 174, 96, 0.08);
+        transform: translateY(-2px);
+    }
+
+    .tech-icon {
+        transition: transform 0.2s ease;
+    }
+
+    .tech-icon:hover {
+        transform: scale(1.05);
+    }
+
+    /* Clean section dividers */
+    .section-divider {
+        height: 3px;
+        background-color: black;
+        width: 100%;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 640px) {
+        .switch-btn {
+            border-width: 2px;
+            box-shadow: 2px 2px 0px black;
+        }
+        
+        .brutal-border-thin {
+            border-width: 2px;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 3px 3px 0px black;
+        }
+    }
+
+    /* Container padding for small screens */
+    @media (max-width: 480px) {
+        .container-padding {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+    }
+
+    /* Smooth Scroll Animation */
+    html {
+        scroll-behavior: smooth;
+    }
+
+    .section-animate {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.6s ease-out;
+    }
+
+    .section-animate.animate {
+        opacity: 1;
+        transform: translateY(0);
+    }
+  </style>
+
+  <script>
+    // Intersection Observer for section animations
+    document.addEventListener('DOMContentLoaded', function() {
+        const sections = document.querySelectorAll('section');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        sections.forEach(section => {
+            section.classList.add('section-animate');
+            observer.observe(section);
+        });
+
+        // Smooth scroll with offset for header
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerOffset = 100;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
+
+                    // Add flash animation to section
+                    target.style.transition = 'outline 0.5s ease';
+                    target.style.outline = '3px solid #27AE60';
+                    setTimeout(() => {
+                        target.style.outline = 'none';
+                    }, 1000);
+                }
+            });
+        });
+    });
+  </script>
+</head>
+<body class="bg-white text-black font-sans">
+
+  <!-- HEADER -->
+  <header class="bg-white py-4 sm:py-6">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8">
+      <div class="accent-bg brutal-border-thin flex flex-col sm:flex-row items-center justify-between p-4 sm:px-8 sm:py-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] space-y-4 sm:space-y-0">
+        <a href="#" class="switch-btn px-4 sm:px-6 py-2 bg-black text-white font-black text-lg sm:text-xl tracking-tight inline-flex items-center justify-center group">
+          DK <span class="inline-block transition-transform group-hover:translate-x-1">→</span>
+        </a>
+        <nav class="flex items-center gap-3 sm:gap-6 flex-wrap justify-center">
+          <a href="#projects" class="switch-btn px-3 sm:px-5 py-2 bg-white text-black font-bold text-base sm:text-lg inline-flex items-center justify-center group hover:bg-[#27AE60] hover:text-white">
+            Projects <span class="inline-block ml-1 opacity-0 group-hover:opacity-100 transition-all">→</span>
+          </a>
+          <a href="#tech" class="switch-btn px-3 sm:px-5 py-2 bg-white text-black font-bold text-base sm:text-lg inline-flex items-center justify-center group hover:bg-[#27AE60] hover:text-white">
+            Tech <span class="hidden sm:inline">Stack </span><span class="inline-block ml-1 opacity-0 group-hover:opacity-100 transition-all">→</span>
+          </a>
+          <a href="#awards" class="switch-btn px-3 sm:px-5 py-2 bg-white text-black font-bold text-base sm:text-lg inline-flex items-center justify-center group hover:bg-[#27AE60] hover:text-white">
+            Awards <span class="inline-block ml-1 opacity-0 group-hover:opacity-100 transition-all">→</span>
+          </a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="bg-white py-8 sm:py-16 mt-4 sm:mt-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8">
+      <div class="bg-white p-4 sm:p-8">
+        <div class="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
+          <!-- Content Side -->
+          <div class="flex-1 space-y-6 sm:space-y-8 text-center lg:text-left">
+            <!-- Name & Title -->
+            <div class="space-y-4 sm:space-y-6">
+              <div class="relative inline-block">
+                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black tracking-tight relative z-10">
+                  Dimas <span class="relative inline-block">
+                    Kendika
+                    <div class="absolute bottom-0 left-0 w-full h-3 sm:h-4 bg-[#27AE60] opacity-30"></div>
+                  </span>
+                </h1>
+                <div class="absolute -top-3 -left-3 sm:-top-4 sm:-left-4 w-16 h-16 sm:w-20 sm:h-20 border-t-4 border-l-4 border-[#27AE60]"></div>
+              </div>
+              <div class="space-y-4">
+                <div class="switch-btn inline-block px-4 sm:px-5 py-2 sm:py-3 text-base sm:text-lg font-bold bg-[#27AE60] text-white">
+                  # Fullstack Developer
+                </div>
+                <p class="text-gray-600 text-base sm:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0">
+                  Creating elegant web solutions with modern technologies. Focused on building user-centric and scalable applications.
+                </p>
+              </div>
+            </div>
+            
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              <a href="#projects" class="switch-btn px-5 sm:px-6 py-2.5 sm:py-3 bg-black text-white font-bold text-base sm:text-lg inline-flex items-center justify-center group">
+                View Projects <span class="inline-block ml-2 transition-transform group-hover:translate-x-1">→</span>
+              </a>
+              <a href="https://wa.me/087864562253" class="switch-btn px-5 sm:px-6 py-2.5 sm:py-3 bg-white text-black font-bold text-base sm:text-lg brutal-border-thin inline-flex items-center justify-center group hover:bg-[#27AE60] hover:text-white">
+                Contact Me <span class="inline-block ml-2 opacity-0 group-hover:opacity-100 transition-all">→</span>
+              </a>
+            </div>
+          </div>
+          
+          <!-- Image Side -->
+          <div class="flex-1 flex items-center justify-center relative lg:ml-12">
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="w-48 h-48 sm:w-64 sm:h-64 lg:w-80 lg:h-80 border-4 border-[#27AE60] opacity-10"></div>
+            </div>
+            <div class="relative z-10">
+              <div class="w-44 h-44 sm:w-56 sm:h-56 lg:w-72 lg:h-72 brutal-border-thin bg-white flex items-center justify-center overflow-hidden shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] group hover:shadow-[6px_6px_0px_0px_rgba(39,174,96,1)] transition-all duration-200">
+                <img src="GACORIAN_Dimas_Kendika_Fazrulfalah-removebg-preview.png" alt="Dimas" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="bg-white py-16 opacity-0 transform translate-y-4 transition-all duration-500">
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="mb-12">
+        <h2 class="text-4xl font-black mb-2">Project</h2>
+        <div class="section-divider"></div>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Project 1 -->
+        <div class="bg-white brutal-border-thin transition-all duration-300 card-hover group">
+          <div class="aspect-video bg-gray-50 overflow-hidden">
+            <img src="larasena.png" alt="Larasena" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 object-center">        
+          </div>
+          <div class="p-6 space-y-4">
+            <div>
+              <h3 class="text-xl font-bold mb-2">Larasena ✨</h3>
+              <div class="space-y-2">
+                <p class="text-gray-600 text-sm leading-relaxed">Platform inovatif yang memadukan warisan budaya batik Indonesia dengan teknologi AI modern. Menghadirkan kemudahan dalam mendesain motif batik yang otentik dan unik.</p>
+                <!-- <p class="text-[#27AE60] text-xs font-medium">✓ 100+ motif batik telah dihasilkan</p> -->
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">React</span>
+              <span class="px-3 py-1 bg-red-100 text-red-800 text-xs font-medium rounded-full">Laravel</span>
+              <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-xs font-medium rounded-full">AI/ML</span>
+            </div>
+            <a href="https://larasena.my.id" target="_blank" rel="noopener noreferrer" class="switch-btn w-full py-3 accent-bg text-white font-medium text-sm group inline-flex items-center justify-center">
+              Visit Project <span class="inline-block transition-transform group-hover:translate-x-1">→</span>
+            </a>
+          </div>
+        </div>
+        
+        <!-- Project 2 -->
+        <div class="bg-white brutal-border-thin transition-all duration-300 card-hover group">
+          <div class="aspect-video bg-gray-50 overflow-hidden">
+            <img src="landingseeo.png" alt="SEEO" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 object-center">
+          </div>
+          <div class="p-6 space-y-4">
+            <div>
+              <h3 class="text-xl font-bold mb-2">SEEO Platform 🚀</h3>
+              <div class="space-y-2">
+                <p class="text-gray-600 text-sm leading-relaxed">Wadah digital untuk komunitas entrepreneur Unsoed. Menyajikan berbagai fitur seperti update event realtime, resource sharing, dan forum diskusi yang interaktif.</p>
+                <!-- <p class="text-[#27AE60] text-xs font-medium">✓ Digunakan oleh 500+ mahasiswa Unsoed</p> -->
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">React</span>
+              <span class="px-3 py-1 bg-cyan-100 text-cyan-800 text-xs font-medium rounded-full">Tailwind</span>
+            </div>
+            <a href="https://seeo.vercel.app" target="_blank" rel="noopener noreferrer" class="switch-btn w-full py-3 accent-bg text-white font-medium text-sm group inline-flex items-center justify-center">
+              Visit Project <span class="inline-block transition-transform group-hover:translate-x-1">→</span>
+            </a>
+          </div>
+        </div>
+        
+        <!-- Project 3 -->
+        <div class="bg-white brutal-border-thin transition-all duration-300 card-hover group">
+          <div class="aspect-video bg-gray-50 overflow-hidden">
+            <img src="cards.png" alt="Cards Redesign" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 object-center">
+          </div>
+          <div class="p-6 space-y-4">
+            <div>
+              <h3 class="text-xl font-bold mb-2">Cards.co.id Transformation 🎯</h3>
+              <div class="space-y-2">
+                <p class="text-gray-600 text-sm leading-relaxed">Transformasi total platform edukasi dengan desain yang modern dan intuitif. Dilengkapi CMS yang powerful untuk manajemen konten pembelajaran yang lebih efisien.</p>
+                <!-- <p class="text-[#27AE60] text-xs font-medium">✓ Peningkatan engagement user hingga 60%</p> -->
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">TypeScript</span>
+              <span class="px-3 py-1 bg-red-100 text-red-800 text-xs font-medium rounded-full">Laravel</span>
+              <span class="px-3 py-1 bg-cyan-100 text-cyan-800 text-xs font-medium rounded-full">Tailwind</span>
+            </div>
+            <a href="#" class="switch-btn w-full py-3 accent-bg text-white font-medium text-sm group inline-flex items-center justify-center">
+              Coming Soon <span class="inline-block ml-1">🔜</span>
+            </a>
+          </div>
+        </div>
+        <div class="bg-white brutal-border-thin transition-all duration-300 card-hover group">
+          <div class="aspect-video bg-gray-50 overflow-hidden">
+            <img src="hackathon.jpg" alt="Nasi Kebuli" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 object-center">
+          </div>
+          <div class="p-6 space-y-4">
+            <div>
+              <h3 class="text-xl font-bold mb-2">Nasi Kebuli Ajibarang</h3>
+              <div class="space-y-2">
+                <p class="text-gray-600 text-sm leading-relaxed">Platform digital untuk UMKM kuliner legendaris Ajibarang. Menghadirkan sistem pemesanan online yang efisien dan manajemen pesanan yang terintegrasi untuk pengalaman pelanggan yang lebih baik.</p>
+                <!-- <p class="text-[#27AE60] text-xs font-medium">✓ Meningkatkan penjualan hingga 40% dalam 2 bulan pertama</p>
+                <p class="text-[#27AE60] text-xs font-medium">✓ Menjangkau 200+ pelanggan baru melalui platform digital</p> -->
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-red-100 text-red-800 text-xs font-medium rounded-full">Laravel</span>
+              <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">React</span>
+              <span class="px-3 py-1 bg-cyan-100 text-cyan-800 text-xs font-medium rounded-full">Tailwind</span>
+              <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-xs font-medium rounded-full">Filament</span>
+            </div>
+            <a href="#" class="switch-btn w-full py-3 accent-bg text-white font-medium text-sm group inline-flex items-center justify-center">
+              Coming Soon <span class="inline-block ml-1">🔜</span>
+            </a>
+          </div>
+        </div>
+        <div class="bg-white brutal-border-thin transition-all duration-300 card-hover group">
+          <div class="aspect-video bg-gray-50 overflow-hidden">
+            <img src="foodwise.png" alt="Foodwise" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 object-center">
+          </div>
+          <div class="p-6 space-y-4">
+            <div>
+              <h3 class="text-xl font-bold mb-2">Foodwise</h3>
+              <div class="space-y-2">
+                <p class="text-gray-600 text-sm leading-relaxed">Platform inovatif untuk mengurangi pemborosan makanan dan mendorong gaya hidup berkelanjutan. Dilengkapi dengan fitur tracking pengolahan limbah makanan sisa dan memantauan kebutuhan gizi sehari-hari.</p>
+                <!-- <p class="text-[#27AE60] text-xs font-medium">✓ Berhasil mengurangi limbah makanan hingga 30% pada pilot project</p>
+                <p class="text-[#27AE60] text-xs font-medium">✓ Mendapat dukungan dari 5+ komunitas lingkungan</p> -->
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">React</span>
+              <!-- <span class="px-3 py-1 bg-red-100 text-red-800 text-xs font-medium rounded-full">Laravel</span> -->
+              <span class="px-3 py-1 bg-cyan-100 text-cyan-800 text-xs font-medium rounded-full">Tailwind</span>
+            </div>
+            <a href="#" class="switch-btn w-full py-3 accent-bg text-white font-medium text-sm group inline-flex items-center justify-center">
+              Coming Soon <span class="inline-block ml-1">🔜</span>
+            </a>
+          </div>
+        </div>
+        <div class="bg-white brutal-border-thin transition-all duration-300 card-hover group">
+          <div class="aspect-video bg-gray-50 overflow-hidden">
+            <img src="lintas.png" alt="Lintas" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 object-center">
+          </div>
+          <div class="p-6 space-y-4">
+            <div>
+              <h3 class="text-xl font-bold mb-2">LINTAS</h3>
+              <div class="space-y-2">
+                <p class="text-gray-600 text-sm leading-relaxed">Marketplace khusus mahasiswa untuk jual-beli dan sewa peralatan kuliah dan praktikum. Memudahkan mahasiswa mengakses alat pembelajaran dengan harga terjangkau sambil membangun ekonomi sirkular di kampus.</p>
+                <!-- <p class="text-[#27AE60] text-xs font-medium">✓ 1000+ transaksi sukses dalam fase beta</p>
+                <p class="text-[#27AE60] text-xs font-medium">✓ Menghemat biaya mahasiswa hingga 50% untuk peralatan praktikum</p> -->
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">TypeScript</span>
+              <span class="px-3 py-1 bg-red-100 text-red-800 text-xs font-medium rounded-full">Laravel</span>
+              <span class="px-3 py-1 bg-cyan-100 text-cyan-800 text-xs font-medium rounded-full">Tailwind</span>
+            </div>
+            <a href="#" class="switch-btn w-full py-3 accent-bg text-white font-medium text-sm group inline-flex items-center justify-center">
+              Coming Soon <span class="inline-block ml-1">🔜</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECH STACK -->
+  <section id="tech" class="bg-white py-16 opacity-0 transform translate-y-4 transition-all duration-500">
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="mb-4">
+        <h2 class="text-4xl font-black mb-4">Tech Stack</h2>
+        <div class="section-divider"></div>
+      </div>
+      
+      <div class="swiper tech-stack-swiper overflow-hidden">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div class="aspect-square flex items-center justify-center group">
+              <img src="1.svg" alt="html" class="w-4/5 h-4/5 transition-transform duration-200 group-hover:scale-110">
+            </div>
+          </div>
+          
+          <div class="swiper-slide">
+            <div class="aspect-square flex items-center justify-center group">
+              <img src="3.svg" alt="css" class="w-4/5 h-4/5 transition-transform duration-200 group-hover:scale-110">
+            </div>
+          </div>
+          
+          <div class="swiper-slide">
+            <div class="aspect-square flex items-center justify-center group">
+              <img src="4.svg" alt="JS" class="w-4/5 h-4/5 transition-transform duration-200 group-hover:scale-110">
+            </div>
+          </div>
+          
+          <div class="swiper-slide">
+            <div class="aspect-square flex items-center justify-center group">
+              <img src="2.svg" alt="React" class="w-4/5 h-4/5 transition-transform duration-200 group-hover:scale-110">
+            </div>
+          </div>
+          
+          <div class="swiper-slide">
+            <div class="aspect-square flex items-center justify-center group">
+              <img src="6.svg" alt="TypeScript" class="w-4/5 h-4/5 transition-transform duration-200 group-hover:scale-110">
+            </div>
+          </div>
+          
+          <div class="swiper-slide">
+            <div class="aspect-square flex items-center justify-center group">
+              <img src="7.svg" alt="Laravel" class="w-4/5 h-4/5 transition-transform duration-200 group-hover:scale-110">
+            </div>
+          </div>
+          
+          <div class="swiper-slide">
+            <div class="aspect-square flex items-center justify-center group">
+              <img src="tailwindcss-mark.d52e9897.svg" alt="tailwindcss" class="w-2/5 h-2/5 transition-transform duration-200 group-hover:scale-110">
+            </div>
+          </div>
+          
+          <div class="swiper-slide">
+            <div class="aspect-square flex items-center justify-center group">
+              <img src="5.svg" alt="Vue" class="w-4/5 h-4/5 transition-transform duration-200 group-hover:scale-110">
+            </div>
+          </div>
+        </div>
+        
+        <!-- Add Custom Navigation -->
+        <button class="swiper-button-prev w-10 h-10 brutal-border-thin bg-white rounded-full flex items-center justify-center absolute left-0 top-1/2 -translate-y-1/2 z-10 hover:bg-gray-50 transition-colors group">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[#27AE60] group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+        <button class="swiper-button-next w-10 h-10 brutal-border-thin bg-white rounded-full flex items-center justify-center absolute right-0 top-1/2 -translate-y-1/2 z-10 hover:bg-gray-50 transition-colors group">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[#27AE60] group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <style>
+      .tech-stack-swiper {
+        padding: 0 3rem;
+      }
+      .swiper-button-next:after, .swiper-button-prev:after {
+        display: none;
+      }
+      .swiper-button-next.swiper-button-disabled, .swiper-button-prev.swiper-button-disabled {
+        opacity: 0.35;
+        pointer-events: none;
+      }
+    </style>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        new Swiper('.tech-stack-swiper', {
+          slidesPerView: 1,
+          spaceBetween: 30,
+          loop: true,
+          speed: 800,
+          autoplay: {
+            delay: 2000,
+            disableOnInteraction: false,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+          breakpoints: {
+            640: {
+              slidesPerView: 2,
+            },
+            768: {
+              slidesPerView: 3,
+            },
+            1024: {
+              slidesPerView: 4,
+            },
+          }
+        });
+      });
+    </script>
+  </section>
+
+  <!-- AWARDS -->
+  <section id="awards" class="bg-white py-16 opacity-0 transform translate-y-4 transition-all duration-500">
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="mb-12">
+        <h2 class="text-4xl font-black mb-4">Certificates & Awards</h2>
+        <div class="section-divider"></div>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Certificate 1 -->
+        <div class="bg-white brutal-border-thin transition-all duration-300 card-hover group">
+          <div class="aspect-[4/3] bg-gray-50 overflow-hidden">
+            <img src="hackathon.png" alt="Hackathon Certificate" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+          </div>
+          <div class="p-6 space-y-4">
+            <div class="flex items-center gap-3">
+              <span class="accent-bg text-white px-3 py-1 text-xs font-bold rounded-full">2025</span>
+              <span class="bg-yellow-100 text-yellow-800 px-3 py-1 text-xs font-medium rounded-full">Juara 3</span>
+            </div>
+            <div>
+              <h3 class="font-bold text-lg mb-2">Hackathon NITRO HMTI</h3>
+              <p class="text-gray-600 text-sm mb-2">HMTI FTS Universitas Muhammadiyah Purwokerto</p>
+              <p class="text-gray-700 text-sm leading-relaxed">Participated in digitalization of UMKM themed hackathon competition.</p>
+            </div>
+            <button class="switch-btn w-full py-3 accent-bg text-white font-medium text-sm">
+              View Certificate
+            </button>
+          </div>
+        </div>
+        
+        <!-- Certificate 2 -->
+        <div class="bg-white brutal-border-thin transition-all duration-300 card-hover group">
+          <div class="aspect-[4/3] bg-gray-50 overflow-hidden">
+            <img src="Web Design Competition - Dimas Kendika Fazrulfalah.jpeg" alt="Web Design Competition Certificate" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+          </div>
+          <div class="p-6 space-y-4">
+            <div class="flex items-center gap-3">
+              <span class="accent-bg text-white px-3 py-1 text-xs font-bold rounded-full">2024</span>
+              <span class="bg-blue-100 text-blue-800 px-3 py-1 text-xs font-medium rounded-full">Juara 2</span>
+            </div>
+            <div>
+              <h3 class="font-bold text-lg mb-2">Web Design Evolution</h3>
+              <p class="text-gray-600 text-sm mb-2">Telkom University</p>
+              <p class="text-gray-700 text-sm leading-relaxed">Achievement in web design competition focusing on modern UI/UX principles.</p>
+            </div>
+            <button class="switch-btn w-full py-3 accent-bg text-white font-medium text-sm">
+              View Certificate
+            </button>
+          </div>
+        </div>
+
+        <!-- Certificate 3 -->
+        <div class="bg-white brutal-border-thin transition-all duration-300 card-hover group">
+          <div class="aspect-[4/3] bg-gray-50 overflow-hidden">
+            <img src="citech.png" alt="Citech Certificate" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+          </div>
+          <div class="p-6 space-y-4">
+            <div class="flex items-center gap-3">
+              <span class="accent-bg text-white px-3 py-1 text-xs font-bold rounded-full">2024</span>
+              <span class="bg-purple-100 text-purple-800 px-3 py-1 text-xs font-medium rounded-full">Top 4</span>
+            </div>
+            <div>
+              <h3 class="font-bold text-lg mb-2">Web Design CITECH</h3>
+              <p class="text-gray-600 text-sm mb-2">Universitas Jember</p>
+              <p class="text-gray-700 text-sm leading-relaxed">Recognition in technology-focused web design competition event.</p>
+            </div>
+            <button class="switch-btn w-full py-3 accent-bg text-white font-medium text-sm">
+              View Certificate
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="mt-8">
+    <div class="accent-bg text-white p-6 text-center font-bold text-lg brutal-border">
+      © 2025 Dimas Kendika - Fullstack Developer
+    </div>
+  </footer>
+
+</body>
+</html>
