@@ -1,0 +1,135 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-plus-jakarta), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  
+  --color-primary: #10b981;
+  --color-secondary: #14b8a6;
+  --color-accent: #8b5cf6;
+  --color-surface: #18181b;
+  --color-surface-hover: #27272a;
+  --color-border: #27272a;
+}
+
+:root {
+  --background: #09090b;
+  --foreground: #f4f4f5;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+::selection {
+  background: var(--color-primary);
+  color: black;
+}
+
+.gradient-text-primary {
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(90deg, #34d399, #10b981);
+}
+
+.gradient-text-secondary {
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(90deg, #14b8a6, #6366f1);
+}
+
+/* Neobrutalism Utilities */
+.neo-card-white {
+  background-color: #18181b;
+  border: 2px solid #27272a;
+  box-shadow: 6px 6px 0px 0px #000000;
+  border-radius: 16px;
+  transition: all 0.2s ease-in-out;
+}
+.neo-card-white:hover {
+  transform: translate(-4px, -4px);
+  border-color: #3f3f46;
+  box-shadow: 10px 10px 0px 0px #000000;
+}
+
+.neo-card-primary {
+  background-color: var(--color-primary);
+  color: #000000;
+  border: 2px solid #000000;
+  box-shadow: 6px 6px 0px 0px #000000;
+  border-radius: 16px;
+  transition: all 0.2s ease-in-out;
+}
+.neo-card-primary:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 10px 10px 0px 0px #000000;
+}
+
+.neo-card-secondary {
+  background-color: var(--color-secondary);
+  color: #000000;
+  border: 2px solid #000000;
+  box-shadow: 6px 6px 0px 0px #000000;
+  border-radius: 16px;
+  transition: all 0.2s ease-in-out;
+}
+.neo-card-secondary:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 10px 10px 0px 0px #000000;
+}
+
+.neo-btn-primary {
+  background-color: var(--color-primary);
+  color: #000000;
+  border: 2px solid #000000;
+  box-shadow: 4px 4px 0px 0px #000000;
+  border-radius: 12px;
+  transition: all 0.15s ease-in-out;
+  cursor: pointer;
+}
+.neo-btn-primary:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px 0px #000000;
+}
+.neo-btn-primary:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0px 0px 0px 0px #000000;
+}
+
+.neo-btn-secondary {
+  background-color: #18181b;
+  color: #f4f4f5;
+  border: 2px solid #27272a;
+  box-shadow: 4px 4px 0px 0px #000000;
+  border-radius: 12px;
+  transition: all 0.15s ease-in-out;
+  cursor: pointer;
+}
+.neo-btn-secondary:hover {
+  transform: translate(-2px, -2px);
+  border-color: #3f3f46;
+  box-shadow: 6px 6px 0px 0px #000000;
+}
+.neo-btn-secondary:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0px 0px 0px 0px #000000;
+}
+
+.neo-badge {
+  background-color: #18181b;
+  color: #f4f4f5;
+  border: 2px solid #27272a;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* Maintain a simplified glass for legacy if needed, or remove. Let's make it flat for neobrutalism. */
+.glass {
+  background: #18181b;
+  border: 2px solid #27272a;
+  box-shadow: 4px 4px 0px 0px #000000;
+}
